@@ -1,0 +1,65 @@
+<div ng-include="'pages/navbar.html'"></div>
+
+<div class="container">
+  <h2>
+    Animais Cadastrados
+    <a href="#/animal/novo" title="Novo">
+      <span class="glyphicon glyphicon-plus"></span>
+    </a>
+  </h2>
+  <p>
+    Lista com todos os animais cadastrados no sistema
+  </p>
+
+  <table ng-table="tableParams" class="table table-striped" show-filter="true">
+      <tr ng-repeat="animal in $data">
+          <td title="'Especie'" filter="{ dsEspecie: 'text'}" sortable="'dsEspecie'">
+              {{animal.dsEspecie}}
+          </td>
+          <td title="'Descrição'" filter="{ descricao: 'text'}" sortable="'descricao'">
+              {{animal.descricao}}
+          </td>
+          <td data-title="'Ativo'" filter-data="getDatasource($column)" filter="{ ativo: 'select'}" sortable="'ativo'">
+              {{animal.ativo}}
+          </td>
+          <td title="'Ações'">
+              <a href="#/animal/{{animal.id}}">
+                <span class="glyphicon glyphicon-pencil"></span>
+              </a>
+              <a href="" ng-click="deletar(animal.id)" 
+                ng-confirm-click="Deseja Deletar" >
+                <span class="glyphicon glyphicon-trash"></span>
+              </a>
+          </td>          
+      </tr>
+  </table>
+
+  <!--
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Especie</th>
+        <th>Descrição</th>
+        <th>Ativo</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="animal in lista">
+        <td>{{animal.dsEspecie}}</td>
+        <td>{{animal.descricao}}</td>
+        <td>{{animal.ativo}}</td>
+        <td>
+          <a href="#/animal/{{animal.id}}">
+            <span class="glyphicon glyphicon-pencil"></span>
+          </a>
+          <a href="" ng-click="deletar(animal.id)" 
+            ng-confirm-click="Deseja Deletar" >
+            <span class="glyphicon glyphicon-trash"></span>
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  -->
+</div>

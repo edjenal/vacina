@@ -1,0 +1,78 @@
+<div ng-include="'pages/navbar.html'"></div>
+
+<div class="container">
+  <h2>
+    Vacinas Cadastradas
+    <a href="#/vacina" title="Nova">
+      <span class="glyphicon glyphicon-plus"></span>
+    </a>
+  </h2>
+  <p>Lista com todas as vacinas cadastradas no sistema</p>
+  <table ng-table="tableParams" class="table table-striped" show-filter="true">
+      <tr ng-repeat="vacina in $data">
+          <td title="'Animal'" filter="{ dsAnimal: 'text'}" sortable="'dsAnimal'">
+              {{vacina.dsAnimal}}
+          </td>
+          <td title="'Especie'" filter="{ dsEspecie: 'text'}" sortable="'dsEspecie'">
+              {{vacina.dsEspecie}}
+          </td>
+          <td title="'Tipo'" filter="{ dsTpVacina : 'text'}" sortable="'dsTpVacina'">
+              {{vacina.dsTpVacina}}
+          </td>
+          <td title="'Lote'" filter="{ lote: 'text'}" sortable="'lote'">
+              {{vacina.lote}}
+          </td>
+           <td title="'Data que tomou'" filter="{ dtTomou: 'text'}" sortable="'dtTomou'">
+              {{vacina.dtTomou}}
+          </td>
+           <td title="'Validade'" filter="{ dtValidade: 'text'}" sortable="'dtValidade'">
+              {{vacina.dtValidade}}
+          </td>
+          </td>
+           <td title="'Ações'">
+              <a href="#/vacina/{{vacina.id}}">
+                <span class="glyphicon glyphicon-pencil"></span>
+              </a>
+              <a href="" ng-click="deletar(vacina.id)" 
+                ng-confirm-click="Deseja Deletar" >
+                <span class="glyphicon glyphicon-trash"></span>
+              </a>
+          </td>
+      </tr>
+  </table>
+
+  <!-- 
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Animal</th>
+        <th>Especie</th>
+        <th>Tipo</th>
+        <th>Lote</th>
+        <th>Data em que tomou</th>
+        <th>Validade</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="vacina in lista">
+        <td>{{vacina.dsAnimal}}</td>
+        <td>{{vacina.dsEspecie}}</td>
+        <td>{{vacina.dsTpVacina != null ? vacina.dsTpVacina : vacina.tipo}}</td>
+        <td>{{vacina.lote}}</td>
+        <td>{{vacina.dtTomou}}</td>
+        <td>{{vacina.dtValidade}}</td>
+        <td>
+          <a href="#/vacina/{{vacina.id}}">
+            <span class="glyphicon glyphicon-pencil"></span>
+          </a>
+          <a href="" ng-click="deletar(vacina.id)" 
+            ng-confirm-click="Deseja Deletar" >
+            <span class="glyphicon glyphicon-trash"></span>
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  -->
+</div>

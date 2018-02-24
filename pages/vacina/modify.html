@@ -1,0 +1,83 @@
+<div ng-include="'pages/navbar.html'"></div>
+
+<div class="container">
+    <div class="col-sm-8 col-sm-offset-2">
+        
+        <div class="page-header">
+            <h1 ng-if="novaVacina">Nova Vacina</h1>
+            <h1 ng-if="!novaVacina">Editar Vacina</h1>
+        </div>
+       
+        <form name="form" ng-submit="submitForm()" novalidate> 
+
+            <div class="form-group" ng-class="{ 'has-error' : form.animal.$invalid && !form.animal.$pristine}">
+                <label>
+                    Animal
+                    <a href="#/animal" title="Novo">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </a>
+                </label>
+                <select name="animal" ng-model="vacina.animal" class="form-control" 
+                    ng-change="carregaTiposVacina()">
+                  <option value="">Selecione</option>
+                  <option ng-repeat="option in model.animais" value="{{option}}">{{option.descricao}}</option>
+                </select>
+                <div ng-messages="form.animal.$error">
+                    <div ng-include="'pages/mensagens.html'"></div>
+                </div>
+            </div>
+
+            <div class="form-group" ng-class="{ 'has-error' : form.idTipoVacina.$invalid && !form.idTipoVacina.$pristine}"
+                ng-if="vacina.animal">
+                <label>Tipo</label>
+                <select name="idTipoVacina" ng-model="vacina.idTipoVacina" class="form-control" 
+                    ng-blur="limparTipo()">
+                  <option value="">Selecione</option>
+                  <option ng-repeat="option in model.tiposVacina" value="{{option.id}}">{{option.nome}}</option>
+                </select>
+                <div ng-messages="form.idTipoVacina.$error">
+                    <div ng-include="'pages/mensagens.html'"></div>
+                </div>
+            </div>
+
+            <div class="form-group" ng-class="{ 'has-error' : form.tipo.$invalid && !form.tipo.$pristine}" ng-if="!vacina.idTipoVacina">
+                <label>Tipo</label>
+                <input type="text" name="tipo" class="form-control" ng-model="vacina.tipo" required placeholder="H1N1" maxlength="49" ng-blur="limparIdTipoVacina()">
+                <div ng-messages="form.tipo.$error">
+                    <div ng-include="'pages/mensagens.html'"></div>
+                </div>
+            </div>
+
+            <div class="form-group" ng-class="{ 'has-error' : form.dtTomou.$invalid && !form.dtTomou.$pristine }">
+                <label>Data em que foi aplicada</label>
+                <input type="text" name="dtTomou" class="form-control" ng-model="vacina.dtTomou" required placeholder="31/12/2015" maxlength="10"
+                  ng-pattern='/^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/'>
+                <div ng-messages="form.dtTomou.$error">
+                    <div ng-include="'pages/mensagens.html'"></div>
+                    <div ng-message="pattern">Formato inválido (dd/mm/yyyy)</div>
+                </div>
+            </div>
+
+            <div class="form-group" ng-class="{ 'has-error' : form.dtValidade.$invalid && !form.dtValidade.$pristine }">
+                <label>Validade</label>
+                <input type="text" name="dtValidade" class="form-control" ng-model="vacina.dtValidade" required placeholder="31/12/2016" maxlength="10"
+                  ng-pattern='/^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/'>
+                <div ng-messages="form.dtValidade.$error">
+                    <div ng-include="'pages/mensagens.html'"></div>
+                    <div ng-message="pattern">Formato inválido (dd/mm/yyyy)</div>
+                </div>
+            </div>
+
+            <div class="form-group" ng-class="{ 'has-error' : form.lote.$invalid && !form.lote.$pristine}">
+                <label>Lote</label>
+                <input type="text" name="lote" class="form-control" ng-model="vacina.lote" required maxlength="49">
+                <div ng-messages="form.lote.$error">
+                    <div ng-include="'pages/mensagens.html'"></div>
+                </div>
+            </div>
+            
+            <button type="submit" class="btn btn-primary" ng-disabled="form.$invalid">Salvar</button>
+            
+        </form>
+    </div><!-- col-sm-8 -->
+</div><!-- /container -->
