@@ -16,7 +16,7 @@ create table usuario (
   primary key (id),
   constraint uc_usuario unique (id, email)
 ) ENGINE=InnoDB CHARACTER SET=utf8 COLLATE utf8_unicode_ci;
-insert into usuario (email, senha) values ('teste@teste.com', '81dc9bdb52d04dc20036dbd8313ed055');
+insert into usuario (email, senha) values ('teste@teste.com', 'e10adc3949ba59abbe56e057f20f883e');
 
 create table especie(
 	id int auto_increment not null,
